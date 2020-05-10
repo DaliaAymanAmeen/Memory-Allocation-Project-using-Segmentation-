@@ -22,6 +22,8 @@ private slots:
 
     void on_add_process_clicked();
 
+    void on_Best_Fit_clicked();
+
 private:
     Ui::output *ui;
 };

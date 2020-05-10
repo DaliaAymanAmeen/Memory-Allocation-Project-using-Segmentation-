@@ -178,8 +178,8 @@ void MainWindow::on_submit_clicked()
     for (int i_segment = 0 ; i_segment < v.size() ; i_segment++)
     {
        QString name_to_draw;
-       int height=0;
-       height = v[i_segment].size * 100;
+       int height;
+       height = v[i_segment].size ;
 
        if (v[i_segment].hole == true) //hole
        {
@@ -189,17 +189,18 @@ void MainWindow::on_submit_clicked()
 
        else //segment
        {
-             name_to_draw = v[i_segment].parent + "\n"  +v[i_segment].parent ;
+             name_to_draw = v[i_segment].parent + "\n"  +v[i_segment].name ;
        }
 
-       down +=height;
+  
 
     QPushButton *to_draw = new QPushButton( name_to_draw , &output);
-    to_draw->move(350,10+down);
-    to_draw->setFixedHeight(height*100);
+    to_draw->move(350 , 50+ (down*3));
+    to_draw->setFixedHeight(height*3);
     to_draw->setFixedWidth(200);
     to_draw->show();
-
+	
+    down += height;
 
 
     }

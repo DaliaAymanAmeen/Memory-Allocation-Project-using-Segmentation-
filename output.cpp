@@ -7,6 +7,12 @@ output::output(QWidget *parent) :
     ui(new Ui::output)
 {
     ui->setupUi(this);
+
+    QPixmap bkgnd(":/Resource/img/watercolour-texture-background-vector.jpg");
+    bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Background, bkgnd);
+    this->setPalette(palette);
 }
 
 output::~output()

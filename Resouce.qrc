@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/Resource">
+        <file>img/watercolour-texture-background-vector.jpg</file>
+    </qresource>
+</RCC>

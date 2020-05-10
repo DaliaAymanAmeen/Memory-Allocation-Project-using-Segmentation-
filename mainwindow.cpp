@@ -11,6 +11,13 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+       QPixmap bkgnd(":/Resource/img/watercolour-texture-background-vector.jpg");
+       bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+       QPalette palette;
+       palette.setBrush(QPalette::Background, bkgnd);
+       this->setPalette(palette);
+
 }
 
 MainWindow::~MainWindow()
@@ -168,6 +175,7 @@ void MainWindow::on_submit_clicked()
     memory->move (350,10);
     memory->setFixedWidth(200);
     memory->setFixedHeight(40);
+    memory->setStyleSheet("QPushButton {text-align: center;background-color :rgb(148, 200, 190);color :white;}");
     memory->show();
 
     /*for (int i_segment = 0 ; i_segment < v.size() ; i_segment++)
@@ -197,14 +205,17 @@ void MainWindow::on_submit_clicked()
   
 
     QPushButton *to_draw = new QPushButton( name_to_draw , &output);
-    to_draw->move(350 , 50+ (down*3));
+    to_draw->move(350 , 70+ (down*3));
     to_draw->setFixedHeight(height*3);
     to_draw->setFixedWidth(200);
+    if (v[i_segment].hole == true) to_draw->setStyleSheet("QPushButton {text-align: center;background-color :black;color :white;}");
+    else to_draw->setStyleSheet("QPushButton {text-align: center;background-color :rgb(148, 200, 190);color :white;}");
+
     to_draw->show();
 
     QLabel* base = new QLabel (&output);
     base->setText(QString::number(v[i_segment].address));
-    base ->move(325, 50+ (down*3));
+    base ->move(325, 70+ (down*3));
     base->setFixedHeight(20);
     base->setFixedWidth(25);
     base->show();

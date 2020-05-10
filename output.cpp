@@ -72,6 +72,7 @@ void output::on_add_seg_clicked()
 void output::on_first_fit_clicked()
 {
     first=1;
+    best=0;
 }
 
 void output::on_add_process_clicked()
@@ -137,11 +138,65 @@ void output::on_add_process_clicked()
 
        }
     }
+ else if(best){
+        QString parent=ui->process_name->text();
+        if(best_fit_alloc(v,names, sizes, parent)){
+
+            int down=0;
+
+            for (int i_seg = 0 ; i_seg < v.size() ; i_seg++)
+            {
+               QString name_to_draw;
+               int height;
+               height = v[i_seg].size ;
+
+               if (v[i_seg].hole == true) //hole
+               {
+                   name_to_draw = "HOLE";
+
+               }
+
+               else //segment
+               {
+                     name_to_draw = v[i_seg].parent + "\n"  +v[i_seg].name ;
+               }
+
+
+
+            QPushButton *to_draw = new QPushButton( name_to_draw ,this);
+            to_draw->move(650 , 70+ (down*3));
+            to_draw->setFixedHeight(height*3);
+            to_draw->setFixedWidth(200);
+            if (v[i_seg].hole == true) to_draw->setStyleSheet("QPushButton {text-align: center;background-color :black;color :white;}");
+            else to_draw->setStyleSheet("QPushButton {text-align: center;background-color :rgb(148, 200, 190);color :white;}");
+
+            to_draw->show();
+
+            QLabel* base = new QLabel (this);
+            base->setText(QString::number(v[i_seg].address));
+            base ->move(625, 70+ (down*3));
+            base->setFixedHeight(20);
+            base->setFixedWidth(25);
+            base->show();
+
+            down += height;
+
+
+
+        }
+        }
+
+        else{
+            QMessageBox::warning(this,"NO","You can't enter this process in best fit");
+        }
+
+    }
+
  ui->seg_number->clear();
  ui->segment_name->clear();
  ui->seg_size->clear();
  ui->process_name->clear();
-
+ki=0;
 }
 
 
@@ -149,3 +204,9 @@ void output::on_add_process_clicked()
 
 
 
+
+void output::on_Best_Fit_clicked()
+{
+    best=1;
+    first=0;
+}

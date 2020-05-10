@@ -3,6 +3,8 @@
 #include "QMessageBox"
 #include <QIntValidator>
 #include <output.h>
+#include <QTextEdit>
+#include <QLabel>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -199,16 +201,20 @@ void MainWindow::on_submit_clicked()
     to_draw->setFixedHeight(height*3);
     to_draw->setFixedWidth(200);
     to_draw->show();
-	
+
+    QLabel* base = new QLabel (&output);
+    base->setText(QString::number(v[i_segment].address));
+    base ->move(325, 50+ (down*3));
+    base->setFixedHeight(20);
+    base->setFixedWidth(25);
+    base->show();
+
     down += height;
 
 
     }
 
-
-
     output.exec();
-
 
 }
 

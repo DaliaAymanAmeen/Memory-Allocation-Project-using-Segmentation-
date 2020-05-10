@@ -15,6 +15,13 @@ public:
     explicit output(QWidget *parent = nullptr);
     ~output();
 
+private slots:
+    void on_add_seg_clicked();
+
+    void on_first_fit_clicked();
+
+    void on_add_process_clicked();
+
 private:
     Ui::output *ui;
 };

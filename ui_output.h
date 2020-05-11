@@ -13,10 +13,12 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -36,6 +38,10 @@ public:
     QLineEdit *seg_number;
     QLineEdit *segment_name;
     QLineEdit *seg_size;
+    QWidget *widget;
+    QHBoxLayout *horizontalLayout;
+    QPushButton *pushButton;
+    QLineEdit *lineEdit;
 
     void setupUi(QDialog *output)
     {
@@ -81,6 +87,22 @@ public:
         seg_size = new QLineEdit(groupBox);
         seg_size->setObjectName(QString::fromUtf8("seg_size"));
         seg_size->setGeometry(QRect(190, 270, 113, 41));
+        widget = new QWidget(output);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(20, 500, 351, 41));
+        horizontalLayout = new QHBoxLayout(widget);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        pushButton = new QPushButton(widget);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+
+        horizontalLayout->addWidget(pushButton);
+
+        lineEdit = new QLineEdit(widget);
+        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+
+        horizontalLayout->addWidget(lineEdit);
+
 
         retranslateUi(output);
 
@@ -99,6 +121,7 @@ public:
         label_3->setText(QCoreApplication::translate("output", "Segment name", nullptr));
         label_4->setText(QCoreApplication::translate("output", "Size of Segment", nullptr));
         add_seg->setText(QCoreApplication::translate("output", "Add", nullptr));
+        pushButton->setText(QCoreApplication::translate("output", "De_allocate", nullptr));
     } // retranslateUi
 
 };

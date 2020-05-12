@@ -149,6 +149,12 @@ bool first_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int
                     break;
                 }
 
+                else
+                {
+                    place_is_found_1 = false;
+                    break;
+                }
+
             }
         }
         if (place_is_found_1 == false) {

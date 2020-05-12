@@ -129,14 +129,16 @@ void output::on_add_process_clicked()
         }
 
 
-
-
-
        }
        else{
            QMessageBox::warning(this,"NO","You can't enter this process in first fit");
 
        }
+
+
+
+
+
     }
  else if(best){
         QString parent=ui->process_name->text();
@@ -211,8 +213,10 @@ void output::on_Best_Fit_clicked()
     first=0;
 }
 
+
 void output::on_pushButton_clicked()
-{     QString pr_deallocat = ui->lineEdit->text();
+{
+    QString pr_deallocat = ui->lineEdit->text();
 
       de_alloc(v, pr_deallocat);
       ui->lineEdit->clear();
@@ -264,6 +268,6 @@ void output::on_pushButton_clicked()
       down += height;
 
 
-      }
+      } 
 
 }

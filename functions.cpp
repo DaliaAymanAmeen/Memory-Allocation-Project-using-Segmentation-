@@ -9,60 +9,127 @@
 //}
 
 
-void add_holes(QVector<segment>&v, QVector<int> adress, QVector<int> size, int total) {
-    /*function that takes two QVectors to put the holes in the memory QVector
+void add_holes(QVector<segment>&v,QVector<int> adress, QVector<int> size, int total) {
+    /*function that takes two vectors to put the holes in the memory vector
     one contatins the starting addresses of each hole
     the second contating the size of each hole
-    the memory QVector is the first parameter
-    it has to update the memory QVector with the holes
+    the memory vector is the first parameter
+    it has to update the memory vector with the holes
     and add data segments to the places already taken*/
-    int temp;
-    int holes_no = (adress.size());
+    int temp,counter=0,holes_repeat=0;
+    char chr= '0';
+    QString str;
+    QVector<QString> names;
+    int holes_no=(adress.size());
     //sorting holes according to the adress
-    for (int i = 0; i<holes_no; i++) {
-        for (int j = i + 1; j<holes_no; j++) {
-            if (adress[j]<adress[i]) {
-                temp = adress[i];
-                adress[i] = adress[j];
-                adress[j] = temp;
-                temp = size[i];
-                size[i] = size[j];
-                size[j] = temp;
+    for(int i=0;i<holes_no;i++){
+        for(int j=i+1;j<holes_no;j++){
+            if(adress[j]<adress[i]){
+                temp=adress[i];
+                adress[i]=adress[j];
+                adress[j]=temp;
+                temp=size[i];
+                size[i]=size[j];
+                size[j]=temp;
             }
         }
     }
-    //check if the start is data
-    if (adress[0] != 0)
-    {
 
-        v.push_back(segment("segment0", "parent0", 0, adress[0]));
+    //for loop to combine holes
+
+    for(int i=0;i<adress.size()-1;i++)
+    {
+        if((adress[i]+size[i])==adress[i+1])
+        {
+            size[i]=size[i]+size[i+1];
+            adress.erase(adress.begin()+i+1);
+            size.erase(size.begin()+i+1);
+            i--;
+        }
+    }
+
+
+    holes_no=(adress.size());
+
+    //vector by the size of the data members containing the names
+    for(int i=0;i<holes_no;){
+        names.push_back("BahaaSultan");
+        names.push_back("YassinEltuhamy");
+        names.push_back("ElPrince");
+        names.push_back("Sobia");
+        names.push_back("Hakeem");
+        i=i+5;
+    }
+
+    //check if the start is data
+    if(adress[0]!=0)
+    {
+        //collecting the name and its repeating number
+        str=chr;
+        str=names[counter]+str;
+        counter++;
+        //adding first data and first hole
+        v.push_back(segment("segment0", str , 0, adress[0]));
         v.push_back(segment(adress[0], size[0]));
-        for (int i = 1; i<holes_no; i++) {
-            v.push_back(segment("segment0", "parent0", adress[i - 1] + size[i - 1], adress[i] - adress[i - 1] - size[i - 1]));
+        //for loop to add inner data and holes
+        for(int i=1; i<holes_no;i++){
+            str=chr;
+            str=names[counter]+ str;
+            v.push_back(segment("segment0", str,adress[i-1]+size[i-1] , adress[i]-adress[i-1]-size[i-1]));
+            counter++;
+            if(counter==5)//if condition to repeat the names
+            {
+                chr=chr+1;
+                counter=0;
+            }
+
             v.push_back(segment(adress[i], size[i]));
 
 
-        }
+    }
         //add data at the end if last hole doesn't end at the end of the memory
-        if ((adress[holes_no - 1] + size[holes_no - 1])<total) {
-
-            v.push_back(segment("segment0", "parent0", adress[holes_no - 1] + size[holes_no - 1], total - adress[holes_no - 1] - size[holes_no - 1]));
-
+        if((adress[holes_no-1]+size[holes_no-1])<total){
+            str=chr;
+            str=names[counter]+str;
+            v.push_back(segment("segment0", str,adress[holes_no-1]+size[holes_no-1] , total-adress[holes_no-1]-size[holes_no-1]));
+            counter++;
+            if(counter==5)
+            {
+                chr=chr+1;
+                counter=0;
+            }
+            counter++;
         }
 
     }
     //check if the start is hole
-    else {
+    else{
+        v.push_back(segment(adress[0], size[0]));//adding the first hole
+        //for loop to add the inner data and holes
+        for(int i=1; i<holes_no;i++){
+            str=chr;
+            str=names[counter]+str;
+            v.push_back(segment("segment0", str ,adress[i-1]+size[i-1] , adress[i]-adress[i-1]-size[i-1]));
+            counter++;
+            if(counter==5)
+            {
+                chr=chr+1;
+                counter=0;
+            }
 
-        v.push_back(segment(adress[0], size[0]));
-        for (int i = 1; i<holes_no; i++) {
-            v.push_back(segment("segment0", "parent0", adress[i - 1] + size[i - 1], adress[i] - adress[i - 1] - size[i - 1]));
             v.push_back(segment(adress[i], size[i]));
-        }
+    }
         //add data at the end if last hole doesn't end at the end of the memory
-        if ((adress[holes_no - 1] + size[holes_no - 1])<total) {
-
-            v.push_back(segment("segment0", "parent0", adress[holes_no - 1] + size[holes_no - 1], total - adress[holes_no - 1] - size[holes_no - 1]));
+        if((adress[holes_no-1]+size[holes_no-1])<total){
+            str=chr;
+            str=names[counter]+str;
+            v.push_back(segment("segment0", str ,adress[holes_no-1]+size[holes_no-1] , total-adress[holes_no-1]-size[holes_no-1]));
+            counter++;
+            if(counter==5)
+            {
+                chr=chr+1;
+                counter=0;
+            }
 
         }
 
@@ -85,11 +152,13 @@ bool best_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int>
                 {
 
                     if (bestIndex == -1)
-                    {bestIndex = j;}
+                    {
+                        bestIndex = j;
+                    }
 
                     else if (check[bestIndex].size > check[j].size)
                         bestIndex = j;
-                    qDebug() << bestIndex;
+
                 }
             }
         }
@@ -106,11 +175,13 @@ bool best_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int>
         }
         else if (check[bestIndex].size > size[i])
         {
-            int it = bestIndex + 1;
-            check[bestIndex].size -= size[i];
-
-            check.insert(check.begin() + it,segment (names[i], parent, (check[bestIndex].address + check[bestIndex].size), size[i]));
-
+            int it = bestIndex+1;
+            int new_size= check[bestIndex].size -size[i];
+            check[bestIndex].size = size[i];
+            check[bestIndex].name = names[i];
+            check[bestIndex].hole = false;
+            check[bestIndex].parent = parent;
+            check.insert(check.begin()+it, segment((check[bestIndex].address + size[i]), new_size));
             place_is_found = true;
         }
     }
@@ -142,16 +213,14 @@ bool first_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int
                 }
                 else if (check_1[j].size > size[i]) {
                     int it_1 = j + 1;
-                    check_1[j].size -= size[i];
+                    int new_size= check_1[j].size -size[i];
+                    check_1[j].size = size[i];
+                    check_1[j].name = names[i];
+                    check_1[j].hole = false;
+                    check_1[j].parent = parent;
+
+                    check_1.insert(check_1.begin()+it_1, segment ((check_1[j].address +size[i]),new_size));
                     place_is_found_1 = true;
-                    check_1.insert(check_1.begin() + it_1,segment (names[i], parent, (check_1[j].address + check_1[j].size), size[i]) );
-
-                    break;
-                }
-
-                else
-                {
-                    place_is_found_1 = false;
                     break;
                 }
 
@@ -163,10 +232,11 @@ bool first_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int
     }
 
 
-        memory = check_1;
-        return true;
+    memory = check_1;
+    return true;
 
 }
+
 
 
 QVector<segment> seg_table(QVector<segment>&v, QString proc) {

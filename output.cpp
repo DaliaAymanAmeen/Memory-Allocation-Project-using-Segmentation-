@@ -108,8 +108,8 @@ void output::on_add_process_clicked()
 
 
            QPushButton *to_draw = new QPushButton( name_to_draw ,this);
-           to_draw->move(650 , 70+ (down*3));
-           to_draw->setFixedHeight(height*3);
+           to_draw->move(650 , 70+((down*500)/total_size));
+           to_draw->setFixedHeight((height*500)/total_size);
            to_draw->setFixedWidth(200);
            if (v[i_seg].hole == true) to_draw->setStyleSheet("QPushButton {text-align: center;background-color :black;color :white;}");
            else to_draw->setStyleSheet("QPushButton {text-align: center;background-color :rgb(148, 200, 190);color :white;}");
@@ -118,7 +118,7 @@ void output::on_add_process_clicked()
 
            QLabel* base = new QLabel (this);
            base->setText(QString::number(v[i_seg].address));
-           base ->move(625, 70+ (down*3));
+           base ->move(625, 70+((down*500)/total_size));
            base->setFixedHeight(20);
            base->setFixedWidth(25);
            base->show();
@@ -164,8 +164,8 @@ void output::on_add_process_clicked()
 
 
             QPushButton *to_draw = new QPushButton( name_to_draw ,this);
-            to_draw->move(650 , 70+ (down*3));
-            to_draw->setFixedHeight(height*3);
+            to_draw->move(650 , 70+ ((down*500)/total_size) );
+            to_draw->setFixedHeight((height*500)/total_size);
             to_draw->setFixedWidth(200);
             if (v[i_seg].hole == true) to_draw->setStyleSheet("QPushButton {text-align: center;background-color :black;color :white;}");
             else to_draw->setStyleSheet("QPushButton {text-align: center;background-color :rgb(148, 200, 190);color :white;}");
@@ -174,7 +174,7 @@ void output::on_add_process_clicked()
 
             QLabel* base = new QLabel (this);
             base->setText(QString::number(v[i_seg].address));
-            base ->move(625, 70+ (down*3));
+            base ->move(625, 70+ ((down*500)/total_size) );
             base->setFixedHeight(20);
             base->setFixedWidth(25);
             base->show();
@@ -209,4 +209,61 @@ void output::on_Best_Fit_clicked()
 {
     best=1;
     first=0;
+}
+
+void output::on_pushButton_clicked()
+{     QString pr_deallocat = ui->lineEdit->text();
+
+      de_alloc(v, pr_deallocat);
+      ui->lineEdit->clear();
+      QPushButton *memory = new QPushButton("Memory", this);
+      memory->move (650,10);
+      memory->setFixedWidth(200);
+      memory->setFixedHeight(40);
+      memory->setStyleSheet("QPushButton {text-align: center;background-color :rgb(148, 200, 190);color :white;}");
+      memory->show();
+
+
+      int down=0;
+
+      for (int i_segment = 0 ; i_segment < v.size() ; i_segment++)
+      {
+         QString name_to_draw;
+         int height;
+         height = v[i_segment].size ;
+
+         if (v[i_segment].hole == true) //hole
+         {
+             name_to_draw = "HOLE";
+
+         }
+
+         else //segment
+         {
+               name_to_draw = v[i_segment].parent + "\n"  +v[i_segment].name ;
+         }
+
+
+
+      QPushButton *to_draw = new QPushButton( name_to_draw , this);
+      to_draw->move(650 , 70+((down*500)/total_size));
+      to_draw->setFixedHeight((height*500)/total_size);
+      to_draw->setFixedWidth(200);
+      if (v[i_segment].hole == true) to_draw->setStyleSheet("QPushButton {text-align: center;background-color :black;color :white;}");
+      else to_draw->setStyleSheet("QPushButton {text-align: center;background-color :rgb(148, 200, 190);color :white;}");
+
+      to_draw->show();
+
+      QLabel* base = new QLabel (this);
+      base->setText(QString::number(v[i_segment].address));
+      base ->move(625, 70+((down*500)/total_size));
+      base->setFixedHeight(20);
+      base->setFixedWidth(25);
+      base->show();
+
+      down += height;
+
+
+      }
+
 }

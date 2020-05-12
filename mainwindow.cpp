@@ -29,7 +29,7 @@ MainWindow::~MainWindow()
  //vector of segments
 
  QVector<segment> v;
-int total_size;
+    int total_size;
 //total size of memory
 
 void MainWindow::on_add_total_size_clicked()  //to take the total size of memory and error checking
@@ -123,8 +123,8 @@ void MainWindow::on_submit_clicked()
 
 
     QPushButton *to_draw = new QPushButton( name_to_draw , &output);
-    to_draw->move(650 , 70+ (down*3));
-    to_draw->setFixedHeight(height*3);
+    to_draw->move(650 , 70+((down*500)/total_size));
+    to_draw->setFixedHeight((height*500)/total_size);
     to_draw->setFixedWidth(200);
     if (v[i_segment].hole == true) to_draw->setStyleSheet("QPushButton {text-align: center;background-color :black;color :white;}");
     else to_draw->setStyleSheet("QPushButton {text-align: center;background-color :rgb(148, 200, 190);color :white;}");
@@ -133,7 +133,7 @@ void MainWindow::on_submit_clicked()
 
     QLabel* base = new QLabel (&output);
     base->setText(QString::number(v[i_segment].address));
-    base ->move(625, 70+ (down*3));
+    base ->move(625, 70+((down*500)/total_size));
     base->setFixedHeight(20);
     base->setFixedWidth(25);
     base->show();

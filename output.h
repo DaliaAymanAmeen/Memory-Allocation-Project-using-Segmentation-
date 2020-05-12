@@ -24,6 +24,8 @@ private slots:
 
     void on_Best_Fit_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::output *ui;
 };

@@ -38,7 +38,7 @@ public:
     QLineEdit *seg_number;
     QLineEdit *segment_name;
     QLineEdit *seg_size;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButton;
     QLineEdit *lineEdit;
@@ -47,7 +47,7 @@ public:
     {
         if (output->objectName().isEmpty())
             output->setObjectName(QString::fromUtf8("output"));
-        output->resize(1200, 680);
+        output->resize(1500, 680);
         groupBox = new QGroupBox(output);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         groupBox->setGeometry(QRect(20, 30, 351, 411));
@@ -87,18 +87,18 @@ public:
         seg_size = new QLineEdit(groupBox);
         seg_size->setObjectName(QString::fromUtf8("seg_size"));
         seg_size->setGeometry(QRect(190, 270, 113, 41));
-        widget = new QWidget(output);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(20, 500, 351, 41));
-        horizontalLayout = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(output);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(20, 500, 351, 41));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        pushButton = new QPushButton(widget);
+        pushButton = new QPushButton(layoutWidget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
 
         horizontalLayout->addWidget(pushButton);
 
-        lineEdit = new QLineEdit(widget);
+        lineEdit = new QLineEdit(layoutWidget);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
 
         horizontalLayout->addWidget(lineEdit);

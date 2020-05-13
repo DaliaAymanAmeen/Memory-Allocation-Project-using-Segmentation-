@@ -53,11 +53,11 @@ void add_holes(QVector<segment>&v,QVector<int> adress, QVector<int> size, int to
 
     //vector by the size of the data members containing the names
     for(int i=0;i<holes_no;){
-        names.push_back("BahaaSultan");
-        names.push_back("YassinEltuhamy");
-        names.push_back("ElPrince");
-        names.push_back("Sobia");
-        names.push_back("Hakeem");
+        names.push_back("Reserved-for-comp");
+        names.push_back("Reserved-for-comp1");
+        names.push_back("Reserved-for-comp2");
+        names.push_back("Reserved-for-comp3");
+        names.push_back("Reserved-for-comp4");
         i=i+5;
     }
 
@@ -221,6 +221,10 @@ bool first_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int
 
                     check_1.insert(check_1.begin()+it_1, segment ((check_1[j].address +size[i]),new_size));
                     place_is_found_1 = true;
+                    break;
+                }
+                else{
+                    place_is_found_1=false;
                     break;
                 }
 

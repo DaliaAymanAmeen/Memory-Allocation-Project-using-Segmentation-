@@ -20,5 +20,5 @@ b. Name and size of each segment.
 3. Deallocate a process (The user chooses a process to deallocate, you should deallocate all segments of this process and consider their spaces as holes to be used later and add them to any neighbouring holes). 
  
 ## Output:
-Your output is a drawing representing memory layout after each allocation or deallocation. Also, you should show the contents of the segment table for each process. 
+The output is a drawing representing memory layout after each allocation or deallocation. Also, It shows the contents of the segment table for each process. 
  

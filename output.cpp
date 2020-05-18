@@ -310,8 +310,14 @@ void output::on_Best_Fit_clicked()
 void output::on_pushButton_clicked()
 {
     QString pr_deallocat = ui->lineEdit->text();
+
+
+     if (pr_deallocat != "Reserved00" && pr_deallocat != "Reserved10" &&pr_deallocat != "Reserved20" && pr_deallocat != "Reserved30" &&pr_deallocat != "Reserved40" && pr_deallocat != "Reserved50")
+    {
         space=(space<Map[pr_deallocat])?space:Map[pr_deallocat];
         factor--;
+    }
+
       de_alloc(v, pr_deallocat);
 
       ui->lineEdit->clear();

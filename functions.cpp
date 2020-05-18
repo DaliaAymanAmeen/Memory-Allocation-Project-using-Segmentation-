@@ -53,11 +53,11 @@ void add_holes(QVector<segment>&v,QVector<int> adress, QVector<int> size, int to
 
     //vector by the size of the data members containing the names
     for(int i=0;i<holes_no;){
-        names.push_back("Reserved-for-comp");
-        names.push_back("Reserved-for-comp1");
-        names.push_back("Reserved-for-comp2");
-        names.push_back("Reserved-for-comp3");
-        names.push_back("Reserved-for-comp4");
+        names.push_back("Reserved0");
+        names.push_back("Reserved1");
+        names.push_back("Reserved2");
+        names.push_back("Reserved3");
+        names.push_back("Reserved4");
         i=i+5;
     }
 

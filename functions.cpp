@@ -93,6 +93,8 @@ void add_holes(QVector<segment>&v,QVector<int> adress, QVector<int> size, int to
             str=names[counter]+str;
             v.push_back(segment("segment0", str,adress[holes_no-1]+size[holes_no-1] , total-adress[holes_no-1]-size[holes_no-1]));
             counter++;
+
+
             if(counter==5)
             {
                 chr=chr+1;
@@ -201,14 +203,19 @@ bool first_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int
     {
         for (int j = 0; j <check_1.size(); j++)
         {
-            if (check_1[j].hole == true)
+            if (check_1[j].hole == true )
             {
-                if (check_1[j].size == size[i]) {
+
+                if (check_1[j].size < size[i]) {
+                    place_is_found_1 = false;
+                }
+                else if (check_1[j].size == size[i]) {
                     check_1[j].name = names[i];
                     check_1[j].hole = false;
                     check_1[j].parent = parent;
                     place_is_found_1 = true;
                     break;
+
 
                 }
                 else if (check_1[j].size > size[i]) {
@@ -222,12 +229,8 @@ bool first_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int
                     check_1.insert(check_1.begin()+it_1, segment ((check_1[j].address +size[i]),new_size));
                     place_is_found_1 = true;
                     break;
-                }
-                else{
-                    place_is_found_1=false;
-                    break;
-                }
 
+                }
             }
         }
         if (place_is_found_1 == false) {
@@ -240,6 +243,7 @@ bool first_fit_alloc(QVector<segment>&memory, QVector<QString>names, QVector<int
     return true;
 
 }
+
 
 
 
